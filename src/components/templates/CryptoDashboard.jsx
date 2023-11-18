@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
 import { getCoinsList } from "../../services/cryptoApi";
 
-import TableCoins from "../modules/TableCoins";
-import Pagination from "../modules/Pagination";
-import Search from "../modules/Search";
-import Chart from "../modules/Chart";
+import CoinTable from "../modules/CoinTable";
+import CoinPagination from "../modules/CoinPagination";
+import CoinSearch from "../modules/CoinSearch";
+import CurrencyChartModal from "../modules/CurrencyChartModal";
 
-function HomePage() {
+function CryptoDashboard() {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,11 +20,13 @@ function HomePage() {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const coinsListRes = await fetch(getCoinsList(currentPage, currency));
-        const coinsListJson = await coinsListRes.json();
-        setCoins(coinsListJson);
+        const coinsListRes = await axios.get(
+          getCoinsList(currentPage, currency)
+        );
+        setCoins(coinsListRes.data);
         setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.log(error.message);
       }
     };
@@ -31,7 +34,7 @@ function HomePage() {
   }, [currentPage, currency]);
 
   return (
-    <div className="container mx-auto text-white max-w-5xl px-3 py-2">
+    <div className="container min-h-[80vh] mx-auto text-white max-w-5xl px-3 py-2">
       {isLoading ? (
         <>
           <MutatingDots
@@ -45,16 +48,17 @@ function HomePage() {
         </>
       ) : (
         <>
-          <Search currency={currency} setCurrency={setCurrency} />
-          <TableCoins
+          <CoinSearch currency={currency} setCurrency={setCurrency} />
+          <CoinTable
             coins={coins}
             setShowChart={setShowChart}
             setDataChart={setDataChart}
-            />
-            {showChart && (
-              <Chart setShowChart={setShowChart} dataChart={dataChart} />
-            )}
-          <Pagination
+            currency={currency}
+          />
+          {showChart && (
+            <CurrencyChartModal setShowChart={setShowChart} dataChart={dataChart} />
+          )}
+          <CoinPagination
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
@@ -64,4 +68,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default CryptoDashboard;

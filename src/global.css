@@ -4,7 +4,9 @@
 
 @layer base {
     html{
-        background-color: rgb(15, 15, 15);
+        background-color: rgb(14, 0, 41);
+        font-family: 'Noto Naskh Arabic', serif;
+        font-family: 'Titillium Web', sans-serif;
     }
     #root ::-webkit-scrollbar{
             width: 0;

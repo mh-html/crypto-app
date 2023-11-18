@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { searchCoins } from "../../services/cryptoApi";
 import { MutatingDots } from "react-loader-spinner";
 
-function Search({ currency, setCurrency }) {
+function CoinSearch({ currency, setCurrency }) {
   const [searchValue, setSearchValue] = useState("");
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-
     const controller = new AbortController();
-    setCoins([])
+    setCoins([]);
     if (!searchValue) {
       setCoins([]);
       return;
@@ -34,30 +33,26 @@ function Search({ currency, setCurrency }) {
   }, [searchValue]);
 
   return (
-    <div className="relative ml-10 my-14 p-3">
+    <div className="relative mb-8">
       <input
-        className="border border-blue-500 rounded-md bg-transparent placeholder:text-white valid:text-white px-2 py-1 w-72 focus:outline-none"
+        className="border border-white rounded-md bg-transparent placeholder:text-white valid:text-white px-2 py-1 w-72 focus:outline-none"
         type="text"
         placeholder="Search..."
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <select
-        className="ml-5 bg-black border border-blue-500 rounded-md px-2 py-1 "
+        className="ml-5 bg-blue-900 border border-blue-500 rounded-md px-2 py-1 font-semibold"
         value={currency}
         onChange={(e) => setCurrency(e.target.value)}>
-        <option className="" value="usd">
-          USD
-        </option>
-        <option className="" value="eur">
-          EUR
-        </option>
-        <option className="" value="jpy">
-          JPY
-        </option>
+        <option value="usd">USD</option>
+        <option value="eur">EUR</option>
+        <option value="jpy">JPY</option>
+        <option value="gbp">GBP</option>
+        <option value="sar">SAR</option>
       </select>
       {!!searchValue && (
-        <div className="absolute top-16 bg-black/50 overflow-y-scroll backdrop-blur-md h-60 p-2 w-72 border border-blue-500 rounded-md">
+        <div className="absolute top-16 bg-black/40 overflow-y-scroll backdrop-blur-md h-60 p-2 w-72 border border-blue-500 rounded-md">
           <ul className="w-full h-full">
             {!!coins.length && !isLoading ? (
               coins.map((coin) => (
@@ -84,4 +79,4 @@ function Search({ currency, setCurrency }) {
   );
 }
 
-export default Search;
+export default CoinSearch;
