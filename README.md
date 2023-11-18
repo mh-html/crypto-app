@@ -1,8 +1,40 @@
-# React + Vite
+# CryptoTracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CryptoTracker is a web application that allows users to track and visualize digital currency data including prices, market caps, and trading volumes.
 
-Currently, two official plugins are available:
+## Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+CryptoTracker is a user-friendly application designed for crypto enthusiasts, traders, and investors. It provides real-time data on various cryptocurrencies, helping users make informed decisions.
+
+## Features
+
+- View real-time prices, market caps, and trading volumes of popular cryptocurrencies.
+- Interactive charts for analyzing historical data.
+- Currency conversion and comparison functionality.
+- User-friendly interface with easy navigation.
+
+## Installation
+
+# Clone the repository:
+
+    ```bash
+        git clone https://github.com/mh-html/CryptoTracker.git
+    ```
+
+# Change directory
+
+    cd crypto-app
+
+# Install dependencies
+
+    ```bash
+        npm i
+    ```
+
+# Then, run project:
+
+    ```bash
+        npm run dev
+    ```
+
+Open [http://localhost:5173/](http://localhost:5173/) with your browser to see the result.
