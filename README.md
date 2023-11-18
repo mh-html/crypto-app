@@ -16,20 +16,14 @@ CryptoTracker is a user-friendly application designed for crypto enthusiasts, tr
 ## Installation
 
 # Clone the repository:
-
-    ```bash
         git clone https://github.com/mh-html/CryptoTracker.git
-    ```
+
 
 # Change directory
-
     cd crypto-app
 
 # Install dependencies
-
-    ```bash
         npm i
-    ```
 
 # Then, run project:
 
