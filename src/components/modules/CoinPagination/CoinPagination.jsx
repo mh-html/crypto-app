@@ -1,10 +1,9 @@
 import { useEffect } from "react";
+const npPaginationStyle =
+  "border border-blue-700 px-3 py-1 mx-1 rounded-md bg-blue-900";
+const customClickStyle = "border border-blue-700 px-3 py-1 mx-1 rounded-md";
 
 function CoinPagination({ currentPage, setCurrentPage }) {
-  const npPaginationStyle =
-    "border border-blue-700 px-3 py-1 mx-1 rounded-md bg-blue-900";
-  const customClickStyle = "border border-blue-700 px-3 py-1 mx-1 rounded-md";
-
   const nextPage = () => {
     if (currentPage >= 10) return;
     setCurrentPage((currentPage) => currentPage + 1);
@@ -15,9 +14,9 @@ function CoinPagination({ currentPage, setCurrentPage }) {
     setCurrentPage((currentPage) => currentPage - 1);
   };
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="text-center my-5">

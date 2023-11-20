@@ -1,36 +1,28 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
-import { getCoinsList } from "../../services/cryptoApi";
 
-import CoinTable from "../modules/CoinTable";
-import CoinPagination from "../modules/CoinPagination";
-import CoinSearch from "../modules/CoinSearch";
-import CurrencyChartModal from "../modules/CurrencyChartModal";
+import {CoinTable} from "../../modules/CoinTable/index";
+import {CoinSearch} from "../../modules/CoinSearch/index";
+import {CurrencyChartModal} from "../../modules/CurrencyChartModal/index";
+import {CoinPagination} from "../../modules/CoinPagination/index";
+
+import { fetchCoinsData } from "../../../services/cryptoApi";
 
 function CryptoDashboard() {
   const [coins, setCoins] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [currency, setCurrency] = useState("usd");
   const [showChart, setShowChart] = useState(false);
   const [dataChart, setDataChart] = useState([]);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const coinsListRes = await axios.get(
-          getCoinsList(currentPage, currency)
-        );
-        setCoins(coinsListRes.data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.log(error.message);
-      }
-    };
-    getData();
+    (async () =>{
+      setIsLoading(true);
+      const coinsListRes = await fetchCoinsData(currentPage, currency)
+      setCoins(coinsListRes.data);
+      setIsLoading(false);
+    })()
   }, [currentPage, currency]);
 
   return (
@@ -56,7 +48,10 @@ function CryptoDashboard() {
             currency={currency}
           />
           {showChart && (
-            <CurrencyChartModal setShowChart={setShowChart} dataChart={dataChart} />
+            <CurrencyChartModal
+              setShowChart={setShowChart}
+              dataChart={dataChart}
+            />
           )}
           <CoinPagination
             currentPage={currentPage}

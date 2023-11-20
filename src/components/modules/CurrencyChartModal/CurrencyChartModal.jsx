@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { transformData } from "../helpers/dataUtils";
+import { transformData } from "../../helpers/dataUtils";
 
 const deActive = "border-2 border-blue-600 text-blue-600 px-3 rounded-md font-bold";
 const active = "border-2 border-blue-600 text-white bg-blue-600 px-3 rounded-md font-bold";

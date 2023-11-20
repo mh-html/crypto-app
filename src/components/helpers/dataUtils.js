@@ -1,7 +1,10 @@
 const transformData = (dataSet, dataType) => {
-  const data = dataSet[dataType] || []; // Handle missing or undefined data types
+  const data = dataSet[dataType] ?? [];
   return Array.isArray(data)
-    ? data.map(([dataItem, typeItem]) => ({ data: dataItem, [dataType]: typeItem }))
+    ? data.map(([dataItem, typeItem]) => ({
+        data: dataItem,
+        [dataType]: typeItem,
+      }))
     : [];
 };
 
@@ -10,8 +13,7 @@ const currencySymbols = {
   eur: "€",
   jpy: "¥",
   gbp: "£",
-  sar: "﷼"
+  sar: "﷼",
 };
 
 export { transformData, currencySymbols };
-

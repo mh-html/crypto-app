@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { searchCoins } from "../../services/cryptoApi";
+import { searchCoins } from "../../../services/cryptoApi";
 import { MutatingDots } from "react-loader-spinner";
+import axios from "axios";
 
 function CoinSearch({ currency, setCurrency }) {
   const [searchValue, setSearchValue] = useState("");
@@ -8,28 +9,20 @@ function CoinSearch({ currency, setCurrency }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
     setCoins([]);
     if (!searchValue) {
       setCoins([]);
       return;
     }
-    try {
+
+    const search = setTimeout(async () => {
       setIsLoading(true);
-      const serch = async () => {
-        const res = await fetch(searchCoins(searchValue), {
-          signal: controller.signal,
-        });
-        const json = await res.json();
-        setIsLoading(false);
-        setCoins(json.coins);
-      };
-      serch();
-    } catch (err) {
+      const json = await axios.get(searchCoins(searchValue));
       setIsLoading(false);
-      alert("Not Founded!");
-    }
-    return () => controller.abort();
+      setCoins(json.data.coins);
+    }, 1500);
+
+    return () => clearTimeout(search);
   }, [searchValue]);
 
   return (

@@ -1,5 +1,5 @@
-import CryptoDashboard from "./components/templates/CryptoDashboard";
-import AppLayout from "./layouts/AppLayout";
+import { CryptoDashboard } from "./components/templates/CryptoDashboard/index";
+import { AppLayout } from "./layouts/AppLayout/index";
 
 function App() {
   return (
