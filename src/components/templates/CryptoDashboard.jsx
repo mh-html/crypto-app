@@ -3,10 +3,13 @@ import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
 import { getCoinsList } from "../../services/cryptoApi";
 
-import CoinTable from "../modules/CoinTable";
-import CoinPagination from "../modules/CoinPagination";
-import CoinSearch from "../modules/CoinSearch";
-import CurrencyChartModal from "../modules/CurrencyChartModal";
+import {
+  CoinPagination,
+  CoinSearch,
+  CoinTable,
+  CoinTableRow,
+  CurrencyChartModal,
+} from "../modules";
 
 function CryptoDashboard() {
   const [coins, setCoins] = useState([]);
@@ -56,7 +59,10 @@ function CryptoDashboard() {
             currency={currency}
           />
           {showChart && (
-            <CurrencyChartModal setShowChart={setShowChart} dataChart={dataChart} />
+            <CurrencyChartModal
+              setShowChart={setShowChart}
+              dataChart={dataChart}
+            />
           )}
           <CoinPagination
             currentPage={currentPage}
